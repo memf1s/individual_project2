@@ -1,0 +1,41 @@
+<template>
+    <div class="content slds-grid slds-gutters">
+        <div class="slds-col">
+            <img
+                src={pictureUrl}
+                class="product"
+                alt="Product picture"
+            />
+        </div>
+        <div class="slds-col">
+            <div class="title">
+                {orderItem.Name}
+            </div>
+            <div class="title">
+                Price:&nbsp; 
+                <lightning-formatted-number
+                    value={orderItem.Price}
+                    format-style="currency"
+                    currency-code="USD"
+                ></lightning-formatted-number>
+            </div>
+            <div>
+                <lightning-input type="number"
+                    value={orderItem.Quantity}
+                    label="Quantity"
+                    min="1"
+                    max={orderItem.QuantityInStock}
+                    message-when-range-overflow={overflowMessage}
+                    onchange={handleQuantityChange}>
+                </lightning-input>
+                <lightning-button-icon
+                    onclick={deleteOrderItem}
+                    icon-name="utility:delete"
+                    variant="bare"
+                    size="large"
+                    class="delete-button"
+                ></lightning-button-icon>
+            </div>
+        </div>
+    </div>
+</template>

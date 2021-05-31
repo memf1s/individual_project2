@@ -1,0 +1,23 @@
+<template>
+    <div class="slds-card slds-var-p-around_x-small">
+        <template if:true={categories.data}>
+            <a onclick={handleCatalogClick}><h4 class="slds-tree__group-header" id="treeheading">Catalog</h4></a>
+            <ul aria-labelledby="treeheading" class="slds-tree" role="tree">
+                <div class="slds-tree_container">
+                    <template for:each={categories.data} for:item="category">
+                        <li key={category.name} role="treeitem" data-id={category.name} onclick={handleCategoryClick}>
+                            <div class="slds-tree__item">
+                                <span class="slds-has-flexi-truncate">
+                                    <span class="slds-tree__item-label slds-truncate" title="Tree Item">{category.name} ({category.count})</span>
+                                </span>
+                            </div>
+                        </li>
+                    </template>
+                </div>
+            </ul>
+        </template>
+        <template if:false={categories.data}>
+            <c-placeholder message="no categories found"></c-placeholder>
+        </template>
+    </div>
+</template>

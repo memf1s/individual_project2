@@ -1,0 +1,19 @@
+img.product {
+    height: 80px;
+    max-width: initial;
+    pointer-events: none;
+}
+
+.content {
+    padding: 1px;
+    background-color: #ffffff;
+}
+
+a {
+    color: inherit;
+}
+
+.title {
+    font-weight: bold;
+    text-transform: uppercase;
+}

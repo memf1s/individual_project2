@@ -1,0 +1,36 @@
+<template>
+    <div>
+        <div class="content slds-align_absolute-center">
+            <img
+                src={pictureUrl}
+                class="product"
+                alt="Product picture"
+            />
+            <div class="content">
+                <div class="slds-align_absolute-center">
+                    <p class="title">{product.Name}</p>
+                </div>
+                <div>
+                    <lightning-input type="number"
+                        value={quantity}
+                        label="Quantity"
+                        min="1"
+                        max={product.QuantityInStock}
+                        message-when-range-overflow={overflowMessage}
+                        onchange={handleQuantityChange}>
+                    </lightning-input>
+                </div>
+                <div>
+                    <lightning-formatted-number
+                        value={product.Price}
+                        format-style="currency"
+                        currency-code="USD"
+                    ></lightning-formatted-number>
+                    <lightning-button label="Add To Cart"
+                        title="Cart" onclick={handleToCartClick}
+                        class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

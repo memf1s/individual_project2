@@ -1,0 +1,52 @@
+<template>
+    <div class="content slds-scrollable_y slds-card">
+        <template if:true={orderItems.length}>
+            <header class="slds-text-heading_small">
+                <div>
+                    Order Total:
+                    <lightning-formatted-number
+                        value={orderPrice}
+                        format-style="currency"
+                        currency-code="USD"
+                        class="order-total"
+                    ></lightning-formatted-number>
+                </div>
+                <div class="right">Total Items: {orderQuantity}</div>
+                <div>
+                    <template if:true={orderItems.length}>
+                        <lightning-button label="Submit My Order"
+                            title="Submit Order"
+                            class="slds-m-left_x-small"
+                            onclick={handleSubmitOrder}
+                        ></lightning-button>
+                    </template>
+                </div>
+                <div>
+                    <template if:true={orderItems.length}>
+                        <lightning-button label="Clear My Order"
+                            title="Clear Order"
+                            class="slds-m-left_x-small"
+                            onclick={handleClearOrder}
+                        ></lightning-button>
+                    </template>
+                </div>
+            </header>
+            <div class="slds-var-p-around_x-small">
+                <template for:each={orderItems} for:item="orderItem">
+                    <c-order-item
+                        key={orderItem.Id}
+                        order-item={orderItem}
+                        class="slds-var-m-around_x-small"
+                        onorderitemchange={handleOrderItemChange}
+                        onorderitemdelete={handleOrderItemDelete}
+                    ></c-order-item>
+                </template>
+                <template if:false={orderItems.length}>
+                    <c-placeholder
+                        message="There are no products in the cart"
+                    ></c-placeholder>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

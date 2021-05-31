@@ -1,0 +1,5 @@
+<design:component label="Petshop Theme Layout">
+	<design:attribute name="leftColumnSize" label="Left Column Width"/>
+    <design:attribute name="centerColumnSize" label="Center Column Width"/>
+    <design:attribute name="rightColumnSize" label="Right Column Width"/>
+</design:component>

@@ -1,0 +1,28 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" description="Custom Content Layout" access="global">
+    <aura:attribute name="header" type="Aura.Component[]" required="false"></aura:attribute>
+    <aura:attribute name="conentColumn1" type="Aura.Component[]" required="false"></aura:attribute>
+    <aura:attribute name="conentColumn2" type="Aura.Component[]" required="false"></aura:attribute>
+    <aura:attribute name="conentColumn3" type="Aura.Component[]" required="false"></aura:attribute>
+    <aura:attribute name="footer" type="Aura.Component[]" required="false"></aura:attribute>
+    <div class="slds-grid slds-grid--vertical">
+        <div class="slds-col">
+            {!v.column1}
+        </div>
+        <div class="slds-col">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-6">
+                    {!v.conentColumn1}
+                </div>
+                <div class="slds-col slds-size_3-of-6">
+                    {!v.conentColumn2}
+                </div>
+                <div class="slds-col slds-size_2-of-6">
+                    {!v.conentColumn3}
+                </div>
+            </div>
+        </div>
+        <div class="slds-col">
+            {!v.footer}
+        </div>
+    </div>
+</aura:component>

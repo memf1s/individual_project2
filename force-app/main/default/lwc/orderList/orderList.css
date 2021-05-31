@@ -1,0 +1,9 @@
+.content {
+    height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.slds-card {
+    background: rgb(243, 242, 242);
+}
