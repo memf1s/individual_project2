@@ -30,6 +30,14 @@ export default class OrderItem extends LightningElement {
         this.quantity.orderItem.Quantity;
     }
 
+    handleQuantityChange() {
+        const event = new CustomEvent('orderitemchange', {
+            detail: { id: this.orderItem.Id, quantity : this.quantity }
+        });
+        this.dispatchEvent(event);
+        this.quantity.orderItem.Quantity;
+    }
+
     deleteOrderItem() {
         const event = new CustomEvent('orderitemdelete', {
             detail: { id: this.orderItem.Id }

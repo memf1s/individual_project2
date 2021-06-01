@@ -60,7 +60,7 @@ export default class OrderList extends LightningElement {
             }
         } else {
             let orderItem = {...message.productItem};
-            orderItem.Quantity = +orderItem.Quantity + +message.quantity;
+            orderItem.Quantity = +message.quantity;
             this.orderItems = [...this.orderItems, orderItem];
         }
         const summary = calculateOrderSummary(this.orderItems);
@@ -102,15 +102,17 @@ export default class OrderList extends LightningElement {
     }
 
     handleOrderItemDelete(event) {
-        const orderItem = event.currentTarget.dataset.order-item;
-        let index = orderItems.indexOf(orderItem);
-        if (index > -1) {
-            orderItems.splice(index, 1);
-        }
-        this.setOrderItems(orderItems);
+        console.log('delete');
+        console.log('id : ' + event.detail.id);
+        this.orderItems = this.orderItems.filter(x => x.Id !== event.detail.id);
+        const summary = calculateOrderSummary(this.orderItems);
+        this.orderQuantity = summary.quantity;
+        this.orderPrice = summary.price;
     }
 
     handleClearOrder() {
         this.orderItems = [];
+        this.orderQuantity = 0;
+        this.orderPrice = 0;
     }
 }

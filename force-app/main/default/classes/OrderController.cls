@@ -1,9 +1,9 @@
 public with sharing class OrderController {
     @AuraEnabled
     public static Order__c createOrder(List<Map<String, Object>> orderItems) {
-        ID contactId = [Select contactid from User where id =: Userinfo.getUserid()].contactId;
-        ID accountId  = [Select AccountID from Contact where id =: contactId].AccountId;
-        Order__c newOrder = new Order__c(Account__c = accountId, Contact__c = contactId);
+        Id contactId = [Select contactid from User where id =: Userinfo.getUserid()].ContactId;
+        Id accountId  = [Select AccountID from Contact where id =: contactId].AccountId;
+        Order__c newOrder = new Order__c(Account__c = accountId, Contact__c = ContactId);
         insert newOrder;
         List<Order_Item__c> newOrderItems = new List<Order_Item__c>();
 
