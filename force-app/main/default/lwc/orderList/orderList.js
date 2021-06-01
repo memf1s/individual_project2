@@ -1,5 +1,8 @@
 import { LightningElement, wire, track } from 'lwc';
+import Id from '@salesforce/user/Id';
+import isGuest from '@salesforce/user/isGuest';
 import { subscribe, MessageContext } from 'lightning/messageService';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent'
 import PRODUCT_ADDED_MESSAGE from '@salesforce/messageChannel/ProductAdded__c';
 import createOrder from '@salesforce/apex/OrderController.createOrder';
 
@@ -18,6 +21,8 @@ function calculateOrderSummary(orderItems) {
 }
 
 export default class OrderList extends LightningElement {
+    userId = Id;
+    isGuestUser = isGuest;
     @track
     _orderItems = [];
     get orderItems() {
@@ -42,6 +47,10 @@ export default class OrderList extends LightningElement {
         );
     }
 
+    handleLoginClick() {
+        window.open('/login');
+    }
+
     handleOrderItemAdded(message) {
         let index = this.orderItems.findIndex(x => x.Id === message.productItem.Id);
         if(index >= 0) {
@@ -51,7 +60,7 @@ export default class OrderList extends LightningElement {
             }
         } else {
             let orderItem = {...message.productItem};
-            orderItem.Quantity = message.quantity;
+            orderItem.Quantity = +orderItem.Quantity + +message.quantity;
             this.orderItems = [...this.orderItems, orderItem];
         }
         const summary = calculateOrderSummary(this.orderItems);
@@ -68,6 +77,7 @@ export default class OrderList extends LightningElement {
                         message: 'Your Order ID is ' + result.Id
                     })
                 );
+                this.myArray = [{}];
             })
             .catch((e) => {
                 this.dispatchEvent(
@@ -78,6 +88,7 @@ export default class OrderList extends LightningElement {
                     })
                 );
             });
+        this.orderItems = [];
     }
 
     handleOrderItemChange(event) {

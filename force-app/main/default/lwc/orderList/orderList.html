@@ -1,5 +1,8 @@
 <template>
     <div class="content slds-scrollable_y slds-card">
+        <template if:true={isGuestUser}>
+            <lightning-button label="Log In" title="Log In" onclick={handleLoginClick} class="slds-m-left_x-small"></lightning-button>
+        </template>
         <template if:true={orderItems.length}>
             <header class="slds-text-heading_small">
                 <div>

@@ -1,6 +1,10 @@
 public with sharing class OrderController {
     @AuraEnabled
-    public static Id createOrder(List<Map<String, Object>> orderItems) {
+    public static Order__c createOrder(List<Map<String, Object>> orderItems) {
+        ID contactId = [Select contactid from User where id =: Userinfo.getUserid()].contactId;
+        ID accountId  = [Select AccountID from Contact where id =: contactId].AccountId;
+        Order__c newOrder = new Order__c(Account__c = accountId, Contact__c = contactId);
+        insert newOrder;
         List<Order_Item__c> newOrderItems = new List<Order_Item__c>();
 
         for (Map<String, Object> item : orderItems) {
@@ -8,13 +12,12 @@ public with sharing class OrderController {
             newItem.Product__c = (Id) item.get('Id');
             newItem.Price__c = Double.valueOf(item.get('Price'));
             newItem.Quantity__c = Double.valueOf(item.get('Quantity'));
-            newItem.Order__c = 'a0309000004F05cAAC';
+            newItem.Order__c = newOrder.Id;
             newOrderItems.add(newItem);
         }
-        System.debug(newOrderItems);
         insert newOrderItems;
 
-        return 'a0309000004F05cAAC';
+        return newOrder;
     }
 
-}   
+}
