@@ -99,11 +99,12 @@ export default class OrderList extends LightningElement {
                 this.orderItems[index].Quantity = this.orderItems[index].QuantityInStock;
             }
         }
+        const summary = calculateOrderSummary(this.orderItems);
+        this.orderQuantity = summary.quantity;
+        this.orderPrice = summary.price;
     }
 
     handleOrderItemDelete(event) {
-        console.log('delete');
-        console.log('id : ' + event.detail.id);
         this.orderItems = this.orderItems.filter(x => x.Id !== event.detail.id);
         const summary = calculateOrderSummary(this.orderItems);
         this.orderQuantity = summary.quantity;

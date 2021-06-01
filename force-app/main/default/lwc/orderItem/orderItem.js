@@ -6,6 +6,7 @@ export default class OrderItem extends LightningElement {
     @track
     quantity;
 
+    @track
     _orderItem;
     @api
     get orderItem() {
@@ -27,18 +28,9 @@ export default class OrderItem extends LightningElement {
             detail: { id: this.orderItem.Id, quantity : this.quantity }
         });
         this.dispatchEvent(event);
-        this.quantity.orderItem.Quantity;
     }
 
-    handleQuantityChange() {
-        const event = new CustomEvent('orderitemchange', {
-            detail: { id: this.orderItem.Id, quantity : this.quantity }
-        });
-        this.dispatchEvent(event);
-        this.quantity.orderItem.Quantity;
-    }
-
-    deleteOrderItem() {
+    handleOrderItemDelete() {
         const event = new CustomEvent('orderitemdelete', {
             detail: { id: this.orderItem.Id }
         });
